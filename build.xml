@@ -1,20 +1,20 @@
 <project name="FluentMailAPI" default="main" basedir=".">
-	
+
 	<property file="build.properties" />
-	
+
 	<target name="main" depends="clean, setup, compile, compile-tests, run-tests, generate-dist-jar, post-clean" />
-	
+
 	<target name="clean">
 		<echo message="Cleaning directories" />
 		<delete dir="temp" />
 		<delete dir="dist" />
 	</target>
-	
+
 	<target name="post-clean">
 		<echo message="Cleaning unused" />
 		<delete dir="temp" />
 	</target>
-	
+
 	<target name="setup">
 		<echo message="Setting up environment" />
 		<mkdir dir="temp" />
@@ -22,7 +22,7 @@
 		<mkdir dir="temp/classes-test" />
 		<mkdir dir="dist" />
 	</target>
-	
+
 	<target name="compile" depends="clean, setup">
 		<echo message="Compiling src" />
 		<javac target="1.5" source="1.5" srcdir="src" destdir="temp/classes" optimize="on" deprecation="on" debug="true">
@@ -33,7 +33,7 @@
 			</classpath>
 		</javac>
 	</target>
-	
+
 	<target name="compile-tests" depends="compile">
 		<echo message="Compiling tests" />
 		<javac target="1.5" source="1.5" srcdir="src-test" destdir="temp/classes-test" optimize="on" debug="true">
@@ -48,11 +48,11 @@
 			</classpath>
 		</javac>
 	</target>
-	
+
 	<target name="run-tests" depends="compile-tests">
 		<echo message="Running tests" />
 		<junit printsummary="yes" showoutput="true" haltonfailure="yes">
-					
+
 			<classpath>
 				<pathelement path="temp/classes" />
 				<pathelement path="temp/classes-test" />
@@ -71,7 +71,7 @@
 			</batchtest>
 		</junit>
 	</target>
-	
+
 	<target name="generate-dist-jar" depends="compile">
 		<echo message="Generating jar" />
 		<jar destfile="dist/${project.jar.name}">
@@ -84,5 +84,6 @@
 			</fileset>
 		</jar>
 	</target>
-	
+
 </project>
+
